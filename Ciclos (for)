@@ -1,0 +1,56 @@
+#Francisco Ariel Arenas Enciso
+#Práctica de for
+'''
+Imprimir números pares
+
+def esPar(numero):
+    if numero%2 == 0:
+        return True
+    return False
+
+
+def main():
+    for numero in range(1, 21):
+        print("%02d es " % (numero), end="")   #Se factorizó "print"  #"end=" es un parametro defindo y en esta función permite mantener el formato
+        if esPar(numero):
+            print("par")              #"Print" es una función  por obligación da un salto de línea
+        else:
+            print("impar")
+
+
+main()
+'''
+
+'''
+Tabla de multiplicar
+
+#Función qie pide cualquier tabala
+def mostrarTabla(tabla):
+    print("Tabla del", tabla)
+    for factor in range(1,11):   #Genera números [1,2,3,4,5,6,7,8,9,10]
+        producto = tabla * factor
+        print("%d x %d = %d" % (tabla, factor, producto))
+
+def main():
+    mostrarTabla()
+    
+main()
+'''
+
+'''
+Tabla de multiplicar (de 1 a 10)
+
+def mostrarTabla(tabla):
+    print("Tabla del", tabla)
+    for factor in range(1,11):   #Genera números [1,2,3,4,5,6,7,8,9,10]
+        producto = tabla * factor
+        print("%d x %d = %d" % (tabla, factor, producto))
+
+def main():
+    for tabla in range(1,11):
+        mostrarTabla(tabla)
+
+
+main()
+'''
+
