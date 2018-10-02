@@ -1,0 +1,47 @@
+import pygame
+import turtle
+
+
+ANCHO = 800
+ALTO = 800
+
+NEGRO = (0, 0, 0)
+BLANCO = (255, 255, 255)
+VERDE_BANDERA = (0, 255, 0)
+ROJO = (255, 0, 0)
+AZUL = (0, 0, 255)
+
+def dibujarCuadrado(ventana):
+    for delta in range(10, ALTO//2, 10):
+        pygame.draw.rect(ventana, ROJO, (ANCHO//2), delta)
+
+def dibujarFiguraA(ventana):
+    for radio in range(10, ALTO // 2, 10):
+        pygame.draw.circle(ventana, NEGRO, (ANCHO // 2, ALTO // 2), radio, 1)
+
+def dibujar():
+    pygame.init()
+    ventana = pygame.display.set_mode((ANCHO, ALTO))
+    reloj = pygame.time.Clock()
+    termina = False
+
+    while not termina:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                termina == True
+
+        ventana.fill(BLANCO)
+
+        dibujarFiguraA(ventana)
+        dibujarCuadrado(ventana)
+
+
+        pygame.display.flip()
+        reloj.tick(40)
+
+    pygame.quit()
+
+def main():
+    dibujar()
+
+main()
