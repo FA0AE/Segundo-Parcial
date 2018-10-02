@@ -1,0 +1,16 @@
+def esDivisble(numero):
+    if numero%19 == 0:
+        return True
+    return ("")
+
+
+
+def main():
+    for numero in range (100, 1000):
+        print("%02d " %(numero), end ="")
+        if esDivisble(numero):
+            print("es divisible entre 19")
+        else:
+            print("")
+
+main()
