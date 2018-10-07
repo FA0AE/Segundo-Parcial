@@ -1,0 +1,57 @@
+#Francisco Ariel Arenas Enciso
+#Creación de un videojuego
+
+import turtle
+
+# Creación de pantalla de inicio
+def imprimirPantalla():
+    ventana = turtle.Screen()
+    ventana.bgcolor("black")
+    ventana.title("An epic turtle's journey")
+
+# Marco donde se despelagara el titulo y la opción para continuar.
+def imprimirBordes():
+    margen = turtle.Turtle()
+    margen.speed(0)
+    margen.color("green")
+    margen.penup()
+    margen.setposition(-300, -300)
+    margen.pendown()
+    margen.pensize(3)
+    for side in range(4):
+        margen.fd(600)
+        margen.lt(90)
+    margen.hideturtle()
+
+# Tortuga que dibuja el titulo
+def imprimirTitulo():
+    titulo = turtle.Turtle()
+    titulo.speed(0)
+    titulo.color("white")
+    titulo.penup()
+    titulo.setposition(0, 400)
+    titulo.pendown()
+    titulo.pensize(2)
+    for side in range(4):
+        titulo.forward(20)
+        titulo.back(20)
+        titulo.lt(270)
+        titulo.forward(10)
+        titulo.lt(360)
+        titulo.forward(5)
+        titulo.back(5)
+        titulo.lt(270)
+        titulo.forward(15)
+        titulo.lt(360)
+        titulo.forward(20)
+
+
+
+def main():
+
+
+
+main()
+
+
+delay = input("Presiona enter para salir")
