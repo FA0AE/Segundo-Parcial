@@ -1,0 +1,107 @@
+#Francisco Ariel Arenas Enciso
+#A01369122
+#Realización de la misión 5 (ciclos y uso de pygame)
+
+#Priemro se deben de importar las librerias necesarias
+import pygame
+
+
+#Inicializamos pygame
+pygame.init()
+
+
+#Le damos el tamaño a la ventana y la definimos
+ANCHO = 800
+ALTO = 800
+ventana = pygame.display.set_mode((ANCHO, ALTO))
+
+
+#Creamos los colores
+NEGRO = (0, 0, 0)
+BLANCO = (255, 255, 255)
+VERDE =  (0, 255, 0)
+ROJO =  (255, 0 , 0)
+AZUL = (0, 0, 255)
+
+
+#Función que dibuja la figura A mediante las sintaxis y/o parametros que nos ofrece pygame
+def dibujarFiguraA():
+    for radio in range(10, ALTO//2, 10):
+        pygame.draw.circle(ventana, NEGRO, (ANCHO//2, ALTO//2), radio, 1)
+    for delta in range(10, ALTO//2, 10):
+        pygame.draw.rect(ventana, NEGRO, ((ANCHO//2, ALTO//2), (10, 10)))
+
+
+#Función que dibuja la figura B mediante las sintaxis y/o parametros que nos ofrece pygame
+def dibujarFiguraB():
+    color = random.randint(0, 255), random.randint(0,255), random.randit(0,255)
+    for n in range(40):
+        n = (n+1)*10
+        pygame.draw.line(ventana, color, (400 - n, 400), (400, n), 1)
+        pygame.draw.line(ventana, color, (400 + n, 400), (400, n), 1)
+        pygame.draw.line(ventana, color, (400 - n, 400), (400, 800 - n), 1)
+        pygame.draw.line(ventana, color, (400 + n, 400), (400, 800 - n), 1)
+
+
+#Función que dibuja la figura C mediante las sintaxis y/o parametros que nos ofrece pygame
+def dibujarFiguraC():
+
+
+#Función que dibuja la figura D mediante las sintaxis y/o parametros que nos ofrece pygame
+def dibujarFiguraD():
+    pygame.dra.circle(ventana, NEGRO, (), 150, 1)
+
+#Función que calcula elvalor aproximado de Pi. El número "n" es dado por el usuario y éste es dado por main()
+def calcularPi(n):
+
+
+#Función que calcula y regresa cuántos números de 3 digitos son multiplos de 19
+def esDivisble():
+    numeroDivisible = 0
+    for numero in range(100, 1000):
+        if numero % 19 == 0:
+            numeroDivisible = numeroDivisible + 1
+    print ("Son %2d números con tres cifras los que son múltiplos de 19" % numeroDivisible)
+
+
+#Función que realiza cada pirámide de números
+def realizarPirámides():
+
+
+#Función main. Ésta contiene el menú.
+def main():
+    opcion = 0
+    while (opcion != 8):
+        print ("-----------------------------------------------")
+        print ("Misión 5. Seleccione qué quiere hacer")
+        print ("1. Dibujar cuadro y círculos")
+        print("2. Cibujar parábolas")
+        print("3. Dibujar espiral")
+        print("4. Dibujar círculos")
+        print("5. Aproximar PI")
+        print("6. Contar divisibles entre 19")
+        print("7. Imprimir pirámides de números")
+        print("0. Salir")
+        print("¿Qué desea hacer?")
+    opcion =int(input("Elije una opción: "))
+    if (opcion == 1):
+        dibujarFiguraA()
+    if (opcion == 2):
+        dibujarFiguraB()
+    if (opcion == 3):
+        dibujarFiguraC()
+    if (opcion == 4):
+        dibujarFiguraD()
+    if (opcion == 5):
+        n = int(input("Escriba un número: "))
+        calcularPi(n)
+    if (opcion == 6):
+        esDivisble()
+    if (opcion == 7):
+        realizarPirámides()
+    if (opcion == 0):
+        pass
+    else:
+        main()
+
+main()
