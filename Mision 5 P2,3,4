@@ -1,0 +1,72 @@
+'''
+P2
+'''
+
+def calcularValorPi(valorDivisor):
+    divisor = 0
+    for n in range (1, divisor+1):
+        divisor = 1/n**4 + divisor
+        print(divisor)
+
+
+def main():
+    valorDivisor = int(input("Escribe un número: "))
+    print(calcularValorPi(valorDivisor))
+
+
+main()
+
+'''
+def calcularPi():
+    maximo = int(input("Valor del último divisor: "))
+    total: float = 0
+    for n in range(1, maximo+1):
+        total = total + (1/n ** 4)
+    print("El valor calculado de Pi es: %f" % ((90 * total) ** .25))
+
+calcularPi()
+'''
+
+'''
+P3
+'''
+def esDivisble():
+    numeroDivisible = 0
+    for numero in range(100, 1000):
+        if numero % 19 == 0:
+             numeroDivisible = numeroDivisible + 1
+    return ("Son %2d números con tres cifras los que son múltiplos de 19" % numeroDivisible)
+
+print (esDivisble())
+
+'''
+P4
+'''
+
+def hacerPiramidesDeNumeros():
+    ultimoValor = 0
+    for i in range(9):
+        print(ultimoValor*10+i+1, "*", 8, "+", i+1, "=", ((ultimoValor*10)+i+1)*8+i+1)
+        ultimoValor = ultimoValor * 10 + i + 1
+
+def hacerPiramide():
+    primerTermino = 0
+    for numero in range(9):
+        print((((primerTermino*100)//10) + numero + 1), "*", 8, "+", numero+1, "=", (((primerTermino*100)//10) + numero + 1) * 8 + (numero+1))
+        primerTermino = ((primerTermino * 100) // 10) + numero + 1
+
+    print("------------------------------")
+
+    primerUno = 0
+    for valor in range(1000000000):
+        print((primerUno*10) + 1), "*", ((primerUno*10) + 1), "=", (((primerUno*10) + 1)*((primerUno*10) + 1))
+        primerUno = ((primerUno*10) + 1)
+
+def hacerPiramide():
+
+primerUno = 0
+for valor in range(1000000000):
+    print((primerUno * 10) + 1), "*", ((primerUno * 10) + 1), "=", (((primerUno * 10) + 1) * ((primerUno * 10) + 1))
+    primerUno = ((primerUno * 10) + 1)
+
+hacerPiramide()
