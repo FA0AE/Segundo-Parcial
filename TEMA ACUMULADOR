@@ -1,0 +1,21 @@
+#Como inicializar un contador
+
+'''
+
+contador = 0 #Se declara, siempre en 0 cuando se inicializa un programa
+
+contador = contador + 1 #Esta es la suma, el valor que tenía antes "contador" se le agrega 1
+                        #Primero calcula lo de la derecha y el resultddo es almacenado en la variable de la izq.
+
+"Tipo de variable similar: Acumulador --> esta permite agregar poco a poco calores"
+
+acumulador = 0 #Cuando se incia el algortimo no tiene ningún valor
+                #Esta sirve para almacenar sumas
+
+acumulador = 1 #Esta sirve para almacenar productos
+
+
+acumalor = acumulador + valor #se le agrega un valor especifico
+
+acumulador = acumulador * valor #se multiplica un valor especifico
+'''
