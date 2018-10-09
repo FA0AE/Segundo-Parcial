@@ -1,0 +1,147 @@
+#Primero se importa y se inicializa pygame con el fin de tener habilitadas las herramientas necesarias para trabajar.
+import pygame
+pygame.init()
+
+#Un metodo encontrado en internet para generar colores alternos es importando random y creando una función
+import random
+
+#Para la Figura D utilizaremos a la libreria de math de python
+import math
+
+#Se crea la ventana con la que vamos a trabajar
+ANCHO = 800
+ALTO = 800
+ventana = pygame.display.set_mode((ANCHO, ALTO))
+
+#Se establecen los colores con los que se trabajarán
+NEGRO = (0, 0, 0)
+BLANCO = (255, 255, 255)
+#Dentro de los colores se debe de crear una función especial para los colores aleatorios
+def coloresRandom():
+    colores = [(139, 0,0),
+               (0, 100, 0),
+               (0, 0, 139)]
+    return random.choice(colores)
+
+'''Se crea la función que dibuja la figura A (circulos con cuadrados) mediante las herramientas brindadas
+por pygame'''
+def dibujarFiguraA():
+    pygame.init()
+    reloj = pygame.time.Clock()
+    termina = False
+
+    while not termina:  # Ciclo principal, MIENTRAS la variable termina sea False, el ciclo se repite automáticamente
+        # Procesa los eventos que recibe
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:  # El usuario hizo click en el botón de salir
+                termina = True      # Queremos terminar el ciclo
+
+        ventana.fill(BLANCO)
+
+        for radio in range(0, ALTO//2, 10):
+                pygame.draw.circle(ventana, NEGRO, (ANCHO//2, ALTO//2), (radio+1) * 10, 1)
+        for cuadrado in range(10, ALTO//2, 10):
+                pygame.draw.rect(ventana, NEGRO, (((ANCHO//2) - (cuadrado+1) * 5), ((ANCHO//2) - (cuadrado+1) * 5), (cuadrado + 1) * 10, (cuadrado + 1) *10), 1)
+
+
+        pygame.display.flip()  # Actualiza trazos (Si no llamas a esta función, no se dibuja)
+        reloj.tick(40)  # 40 fps
+
+        # Después del ciclo principal
+    pygame.quit()
+
+'''Se crea la función que dibuja la figura B (parabolas) mediante las herramientas brindadas
+por pygame'''
+def dibujarFiguraB():
+    pygame.init()
+    reloj = pygame.time.Clock()
+    termina = False
+
+    while not termina:  # Ciclo principal, MIENTRAS la variable termina sea False, el ciclo se repite automáticamente
+        # Procesa los eventos que recibe
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:  # El usuario hizo click en el botón de salir
+                termina = True      # Queremos terminar el ciclo
+
+        ventana.fill(BLANCO)
+
+        color = coloresRandom()
+        colorUno = coloresRandom()
+        colorDos = coloresRandom()
+        colorTres = coloresRandom()
+        for linea in range(40):
+            linea = (linea+1)*10
+            pygame.draw.line(ventana, color, (400 - linea, 400), (400, linea), 1)
+            pygame.draw.line(ventana, colorUno, (400 + linea, 400), (400, linea), 1)
+            pygame.draw.line(ventana, colorDos, (400 - linea, 400), (400, 800 - linea), 1)
+            pygame.draw.line(ventana, colorTres, (400 + linea, 400), (400, 800 - linea), 1)
+
+        pygame.display.flip()  # Actualiza trazos (Si no llamas a esta función, no se dibuja)
+        reloj.tick(40)  # 40 fps
+
+    # Después del ciclo principal
+    pygame.quit()
+
+
+'''Se crea la funcion que dibuja la figura C ('''
+def dibujarFiguraC(ventana):
+    posicionEnX = 0
+    posicionEnY = 0
+    for linea in range(10):
+        pygame.draw.line(ventana, NEGRO, (400, 400), ((posicionEnX + 1), (posicionEnY+ 1)), 1)
+        pygame.draw.line(ventana, NEGRO, ((posicionEnX + 1), (posicionEnY +1)), 1)
+
+'''
+def dibujarFiguraD():
+    pygame.init()
+    reloj = pygame.time.Clock()
+    termina = False
+
+    while not termina:  # Ciclo principal, MIENTRAS la variable termina sea False, el ciclo se repite automáticamente
+        # Procesa los eventos que recibe
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:  # El usuario hizo click en el botón de salir
+                termina = True      # Queremos terminar el ciclo
+
+        ventana.fill(BLANCO)
+
+        for angulo in range(0, 360, 30):
+                posicionEnX = int(math.sin(math.radians(angulo)) * 150)
+                posicvionEnY = int(math.sin(math.radians(angulo)) * 150)
+                pygame.draw.circle(ventana, NEGRO, ((posicionEnX + ANCHO//2), (posicvionEnY + ALTO //2)), 150, 1)
+
+        pygame.display.flip()  # Actualiza trazos (Si no llamas a esta función, no se dibuja)
+        reloj.tick(40)  # 40 fps
+
+    # Después del ciclo principal
+    pygame.quit()  # termina pygame
+'''
+
+
+def dibujarFiguraD():
+    pygame.init()
+    reloj = pygame.time.Clock()
+    termina = False
+
+    while not termina:  # Ciclo principal, MIENTRAS la variable termina sea False, el ciclo se repite automáticamente
+        # Procesa los eventos que recibe
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:  # El usuario hizo click en el botón de salir
+                termina = True      # Queremos terminar el ciclo
+
+        ventana.fill(BLANCO)
+
+        angulo = 0
+        for radio in range(angulo + 30):
+            angulo = angulo + 30
+            pygame.draw.circle(ventana, NEGRO, (400, 400), 150, 1)
+            pygame.draw.circle(ventana, NEGRO, ((math.cos(angulo) * 150), (math.sin(angulo) * 150)), 150, 1)
+
+        pygame.display.flip()  # Actualiza trazos (Si no llamas a esta función, no se dibuja)
+        reloj.tick(40)  # 40 fps
+
+    # Después del ciclo principal
+    pygame.quit()  # termina pygame
+
+
+dibujarFiguraD()
