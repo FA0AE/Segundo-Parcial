@@ -1,0 +1,157 @@
+#Primero se importa y se inicializa pygame con el fin de tener habilitadas las herramientas necesarias para trabajar.
+import pygame
+pygame.init()
+
+#Un metodo encontrado en internet para generar colores alternos es importando random y creando una función
+import random
+
+#Para la Figura D utilizaremos a la libreria de math de python
+import math
+
+#Se crea la ventana con la que vamos a trabajar
+ANCHO = 800
+ALTO = 800
+ventana = pygame.display.set_mode((ANCHO, ALTO))
+
+#Se establecen los colores con los que se trabajarán
+NEGRO = (0, 0, 0)
+BLANCO = (255, 255, 255)
+#Dentro de los colores se debe de crear una función especial para los colores aleatorios
+def coloresRandom():
+    colores = [(139, 0,0),
+               (0, 100, 0),
+               (0, 0, 139)]
+    return random.choice(colores)
+
+'''Se crea la función que dibuja la figura A (circulos con cuadrados) mediante las herramientas brindadas
+por pygame'''
+def dibujarFiguraA(ventana):
+    for radio in range(10, ALTO//2, 10):
+        pygame.draw.circle(ventana, NEGRO, (ANCHO//2, ALTO//2), (radio+1) * 10, 1)
+    for cuadrado in range(10, ALTO//2, 10):
+        pygame.draw.rect(ventana, NEGRO, (((ANCHO//2) - (cuadrado+1) * 5), ((ANCHO//2) - (cuadrado+1) * 5), (cuadrado + 1) * 10, (cuadrado + 1) *10), 1)
+
+
+'''Se crea la función que dibuja la figura B (parabolas) mediante las herramientas brindadas
+por pygame'''
+def dibujarFiguraB(ventana):
+    color = coloresRandom()
+    for linea in range(40):
+        linea = (linea+1)*10
+        pygame.draw.line(ventana, color, (400 - linea, 400), (400, linea), 1)
+        pygame.draw.line(ventana, color, (400 + linea, 400), (400, linea), 1)
+        pygame.draw.line(ventana, color, (400 - linea, 400), (400, 800 - linea), 1)
+        pygame.draw.line(ventana, color, (400 + linea, 400), (400, 800 - linea), 1)
+
+'''Se crea la funcion que dibuja la figura C ('''
+def dibujarFiguraC(ventana):
+    posicionEnX = 0
+    posicionEnY = 0
+    for linea in range(10):
+        pygame.draw.line(ventana, NEGRO, (400, 400), ((posicionEnX + 1), (posicionEnY+ 1)), 1)
+        pygame.draw.line(ventana, NEGRO, ((posicionEnX + 1), (posicionEnY +1)), 1)
+
+
+def dibujarFiguraD():
+    angulo = 0
+    for radio in range(angulo + 30):
+        angulo = angulo + 30
+        pygame.draw.circle(ventana, NEGRO, (400, 400), 150, 1)
+        pygame.draw.circle(ventana, NEGRO, ((math.cos(angulo) * 150), (math.sin(angulo) * 150)), 150, 1)
+
+def dibujarFiguraDosPuntoCinco(ventana):
+    angulo = 0
+    for radio in range(360):
+        angulo = angulo + 30
+        pygame.draw.circle(ventana, NEGRO, (400, 400), 150, 1)
+        pygame.draw.circle(ventana, NEGRO, ((math.sin(angulo) * 150), (math.cos(angulo) * 150)), 150, 1)
+
+def dibujarCirculos(ventana):
+     for alfa in range(0, 360, 30):
+        x = int(150 * math.cos(math.radians(alfa)))
+        y = int(150 * math.sin(math.radians(alfa)))
+        pygame.draw.circle(ventana, NEGRO, (x + ANCHO // 2, y + ALTO // 2), 150, 1)
+
+
+
+
+
+
+
+#Francisco Ariel Arenas Enciso
+#A01369122
+#Desarrollo de la misión 5 (ciclos, bucles y figruas en pygame)
+
+'''Esta función recibe de main el total de términos que se emplearan en la sucesión dada en la tarea para aproximar el
+valor de PI'''
+def aproximarValorPi(terminos):
+    suma = 0  # Acumulador
+    for denominador in range(1, terminos + 1):
+        suma += 1 / denominador ** 4
+
+    return (90 * suma) ** 0.25
+
+
+'''Esta función mediante un contador ("numeroDivisible") cuenta aquellos números cuya condición (numero % 199 == 0)
+resulta cierta'''
+def deteminarNumerosDivisibles():
+    numeroDivisible = 0
+    for numero in range(100, 1000):
+        if numero % 19 == 0:
+            numeroDivisible = numeroDivisible + 1
+    print("Son %2d números con tres cifras los que son múltiplos de 19" % numeroDivisible)
+
+
+'''Esta función mediante el uso de acumuladores relaiza cada una de las píramides solicitadas'''
+def hacerPiramidesDeNumeros():
+    valoresEnAumento = 0
+    for numero in range(9):
+        print((valoresEnAumento * 10 + numero + 1), "*", 8, "+", numero+1, "=", ((valoresEnAumento * 10 + numero + 1) * 8 + (numero+1)))
+        valoresEnAumento = valoresEnAumento * 10 + numero + 1
+
+    print("------------------------------")
+
+    aumentoDeUno = 0
+    for numero in range(9):
+        print((aumentoDeUno * 10 + 1), "*", (aumentoDeUno * 10 + 1), "=", ((aumentoDeUno * 10 + 1)*(aumentoDeUno * 10 + 1)))
+        aumentoDeUno = aumentoDeUno * 10 + 1
+
+'''Función que controla todo el programa. Esta función será la que contenga el menú para el usuario'''
+def main():
+
+    while True:
+        opcion = int(input('''Misión 5. Seleccione qué quiere hacer
+        
+        1. Dibujar Dibujar cuadro y círculo
+        2. Cibujar parábolas
+        3. Dibujar espiral
+        4. Dibujar círculos
+        5. Aproximar PI
+        6. Contar divisibles entre 19
+        7. Imprimir pirámides de números
+        0. Salir
+        -----------------------------------------------
+        ¿Qué desea hacer?
+         '''))
+        if opcion == 1:
+            dibujarFiguraA()
+        elif opcion == 2:
+            dibujarFiguraB()
+        elif opcion == 3:
+            dibujarFiguraC()
+        elif opcion == 4:
+            dibujarFiguraD()
+        elif opcion == 5:
+            print("Para calcular el valor de pi se necesita saber cuantos términos se usaran en la suscesión.")
+            terminos = int(input("Para ello, teclea cuántos términos desea usar: "))
+            aproximacionPi = aproximarValorPi(terminos)
+            print("PI = ", aproximacionPi)
+        elif opcion == 6:
+            deteminarNumerosDivisibles()
+        elif opcion == 7:
+            hacerPiramidesDeNumeros()
+        elif opcion == 0:
+            break
+
+
+main()
