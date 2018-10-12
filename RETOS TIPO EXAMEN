@@ -1,0 +1,100 @@
+#Francsico Ariel Arenas Enciso
+#A01369122
+
+'''
+def calcularValor(numero):
+    numeroInverso = 0  #Contador
+    while numero > 0:  #Ciclo while
+        digito = numero%10   #Este recibe el número de main y aplica el residuo para separar terminos
+        numero = numero//10  #Esta a partir del mismo numero de main lo divide entre 10
+        numeroInverso = numeroInverso*10 + digito  #Finalmente el inverso (la variable) se multiplica por diez y se le suma el digito de la derecha
+    return numeroInverso  #Dado a que se quere regresar una variable, se usa return.
+
+
+
+def main():
+    numero = int(input("Escribe un número: "))
+    print(calcularValor(numero))
+
+main()
+'''
+
+
+import random
+
+'''
+def main():
+    juego = int(input
+
+    Hola, binevenido a este juego. Las reglas son simples:
+        -Yo crearé un número aleatorio entre uno y diez, y tú, 
+        tienes que adivinar.
+        -No me gustan los errores, así que solo te daré 3 
+        oportunidades para que lo logres ganar.
+
+    ¿Estás listo?
+
+     Escribe tú numero =
+    
+    numeroaleatorio = random.randint(1, 10)
+
+    
+    
+    for oportunidades in range(0, 3, 1):
+        while oportunidades > 0 and oportunidades < 4:
+            if juego == numeroaleatorio:
+                print("Felicidades, me ganaste")
+            elif juego != numeroaleatorio:
+                print("Lo siento escribe otra vez")
+
+    oportunidades = 0
+    while oportunidades > 0 and oportunidades < 4:
+        for oportunidades in range (0, 3, 1):
+            if juego == numeroaleatorio:
+                print("Felicidades, me ganaste")
+            elif juego != numeroaleatorio:
+                print("Lo siento escribe otra vez")
+                
+            
+        oportunidades = oportunidades+1
+
+main()
+'''
+
+import pygame
+import random
+import math
+
+ANCHO = 800
+ALTO = 800
+color = random.randint(0, 255)
+BLANCO = (255, 255, 255)
+
+def dibujo(numeroDeLineas):
+    pygame.init()
+    ventana = pygame.display.set_mode(ANCHO, ALTO)
+    reloj = pygame.time.Clock()
+    termina = False
+
+
+    while not termina:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                termina = True
+
+        ventana.fill(BLANCO)
+
+        angulo = 360 // numeroDeLineas
+        for theta in range(0, 360, angulo):
+            anguloDos = math.radians(theta)
+            x1 = int(200*math.cos(anguloDos))
+            y2 = int(200*math.sin(anguloDos))
+            pygame.draw.circle(ventana, color, (x1+ANCHO//2, ALTO//2-y2), 1)
+
+            
+def main():
+    numeroDeLineas = int(input("¿Cuántas líneas quieres dibujar? "))
+    dibujo(numeroDeLineas)
+
+
+main()
