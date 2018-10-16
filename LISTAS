@@ -1,0 +1,32 @@
+#Franciso Ariel Arenas Enciso
+#Ejercicio con funciones que implican listas
+
+def main():
+    datos = []  #Se define una lista sin datos
+    numero = int(input("Escribe un valor [-1 termina]: "))
+    while numero != -1:
+        #Se preocesan los datos de la primer lectura
+        datos.append(numero)  #Se agrega el numero a la lista. El suauario controla cuantos datos introduce
+        numero = int(input("Escribe un valor [-1 termina]: "))   #Ésta debe de estar dentro del ciclo
+
+    print("Datos capturados: ", datos)  #La lista se imprime como cualquier otra variable
+    print("Número de datos: ", len(datos))
+    if len(datos) > 0:
+        print("Mayor: ", max(datos))
+        print("Menor: ", min(datos))
+        promedio = sum(datos) // len(datos)   #Suma los datos dentro de la lista y los divide entre el total de datos.
+        print("Promedio:", promedio)
+        #For para recorrer la lista
+        print("Al revés: ")
+        for k in range(len(datos)-1, -1, -1): #"k" es un índice ; orden 1,2,.... ; son los datos al réves
+                                            #Empieza en el último dato, termina en -1, y va de -1 en -1
+            print(datos[k]) #Se pueden acceder a ínidces indivudales
+        print("Doble de los valores:")
+        for k in range(len(datos)):
+            print(2*datos[k])
+    else:
+        print("No hay datos, no puedo imprimir información")
+
+
+
+main()
