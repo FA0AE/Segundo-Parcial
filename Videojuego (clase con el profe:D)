@@ -1,0 +1,129 @@
+# encoding: UTF-8
+# Autor: Roberto Martínez Román
+# Muestra cómo utilizar pygame en programas que dibujan en la pantalla
+
+import pygame   # Librería de pygame
+from random import randint
+
+
+# Dimensiones de la pantalla
+ANCHO = 800
+ALTO = 600
+# Colores
+BLANCO = (255, 255, 255)  # R,G,B en el rango [0,255], 0 ausencia de color, 255 toda la intensidad
+VERDE_BANDERA = (27, 94, 32)    # un poco de rojo, más de verde, un poco de azul
+ROJO = (255, 0, 0)      # solo rojo, nada de verde, nada de azul
+AZUL = (0, 0, 255)      # nada de rojo, ni verde, solo azul
+NEGRO = (0, 0, 0)
+
+#Función que dibuja el personaje
+def dibujarPersonaje(ventana, spritePlanta):
+    ventana.blit(spritePlanta.image, spritePlanta.rect)    #blit es para asignar una imagen. Pide una imagen y el lugar
+
+
+#Función para dibujar todos los enemigos
+def dibujarEnemigo(ventana, listaEnemigos):
+    for enemigo in listaEnemigos:     #Este elemento 'enemigo' for visita a cada enemigo que esta dentro de la lista
+        ventana.blit(enemigo.image, enemigo.rect)
+
+#Función que actualiza a los enemigos
+def actualizarEnemigos(listaEnemigos):
+    for enemigo in listaEnemigos:   #Se visita cada enemigo   'for variable in lista'
+        enemigo.rect.left -= 1                     #Dentro del for, se visita o se pide lo que quieres hacer
+                                                   #En este caso se mueva el zombie hacia la izquierda.
+
+#Función para dibujar la venana
+def dibujarBala(ventana, listaBalas):
+    for bala in listaBalas:
+        ventana.blit(bala.image, bala.rect)
+
+#Función para dibujar actualizar las balas
+def actualizarBalas(listaBalas):
+    for bala in listaBalas:
+        bala.rect.right += 5
+
+#Estructura básica de un programa que usa pygame para dibujar
+def dibujar():
+    # Inicializa el motor de pygame
+    pygame.init()
+    # Crea una ventana de ANCHO x ALTO
+    ventana = pygame.display.set_mode((ANCHO, ALTO))  # Crea la ventana donde dibujará
+    reloj = pygame.time.Clock()  # Para limitar los fps
+    termina = False  # Bandera para saber si termina la ejecución, iniciamos suponiendo que no
+
+
+    #Personaje principal
+    imgPlanta = pygame.image.load("Planta.png")  #Se carga la imagen
+    spritePlanta = pygame.sprite.Sprite()  #Se crea un sprite vació (Un sprite que no tiene imagen ni posición)
+    spritePlanta.image = imgPlanta    #Se asigna la imagen al sprite
+    spritePlanta.rect = imgPlanta.get_rect()  #"get_rect()" regresa las dimensiones (x (left), y (bottom), ancho y alto)
+    spritePlanta.rect.left = 0
+    spritePlanta.rect.bottom = ALTO//2 + spritePlanta.rect.height//2 #Sprite.planta conoce la altura de la imagen y se
+                                                                    #colocará en el dentro de la izquierda
+    #Enemigos
+    listaEnemigos = []   #Lista vacia de enemigos
+    imgZombie = pygame.image.load("Zombie.jpg")
+    for  k in range(20):     #Cuantos enemigos quiero (20)
+        spriteEnemigo = pygame.sprite.Sprite()
+        spriteEnemigo.image = imgZombie   #Se le asigna imagen al sprtie
+        spriteEnemigo.rect = imgZombie.get_rect()
+        spriteEnemigo.rect.left = randint(ANCHO//2, ANCHO)  #Valor aleatorio de la posición
+        spriteEnemigo.rect.bottom = randint(0, ALTO)  #Se extiende por toda la pantalla
+        listaEnemigos.append(spriteEnemigo)   #Se llena la lista con los sprites del enemigo
+
+    #Balas
+    imgBala = pygame.image.load("Bala.jpg")
+    listaBalas = []         #Se crea la lista porque el usuario determina cuando se usan
+
+
+
+    while not termina:  # Ciclo principal, MIENTRAS la variable termina sea False, el ciclo se repite automáticamente
+        # Procesa los eventos que recibe
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:  # El usuario hizo click en el botón de salir
+                termina = True      # Queremos terminar el ciclo
+            elif evento.type == pygame. KEYDOWN:    #Cuando el usuario presiona cualquier tecla
+                if evento.key == pygame.K_UP:    #Prueba que teclas se apreto
+                    spritePlanta.rect.bottom -= 10    #SpritePlanta es el valor de y
+                elif evento.key == pygame.K_DOWN:
+                    spritePlanta.rect.bottom += 10
+                elif evento.key == pygame.K_LEFT:           #Son las teclas para mover al personaje. Se llama al sprite
+                    spritePlanta.rect.left -= 10              #y dependiendo si queremos mover y usamos a bottom
+                elif evento.key == pygame.K_RIGHT:            #
+                    spritePlanta.rect.left += 10
+                elif evento.key == pygame.K_z:    #Disparo
+                    spriteBala = pygame.sprite.Sprite()
+                    spriteBala.image = imgBala     #La imagen se crea afuera para que no se cargue
+                    spriteBala.rect = imgBala.get_rect()
+                    spriteBala.rect.left = spritePlanta.rect.left + spritePlanta.rect.width   #'x' es el ancho del
+                    spriteBala.rect.bottom = spritePlanta.rect.bottom - spritePlanta.rect.height//2     #personaje
+                    listaBalas.append(spriteBala)
+
+
+
+        #Actualizar objetos (enemigos, items, personaje)
+        actualizarEnemigos(listaEnemigos)    #Se cambia la 'x' de cada enemigo. No los dibuja, solamente necesita la lista
+        actualizarBalas(listaBalas)
+
+        # Color de la pantalla
+        ventana.fill(NEGRO)
+
+        dibujarPersonaje(ventana, spritePlanta)   #Siempre que se quiere dibujar, se debe de mandar la ventana
+        dibujarEnemigo(ventana, listaEnemigos)   #Se envía la ventana y la lista de enemigos
+        dibujarBala(ventana, listaBalas)      #Se envía la ventana y la lista de balas
+
+
+        pygame.display.flip()  # Actualiza trazos (Si no llamas a esta función, no se dibuja)
+        reloj.tick(40)  # 40 fps
+
+    # Después del ciclo principal
+    pygame.quit()  # termina pygame
+
+
+# Función principal, aquí resuelves el problema
+def main():
+    dibujar()   # Por ahora, solo dibuja
+
+
+# Llamas a la función principal
+main()
