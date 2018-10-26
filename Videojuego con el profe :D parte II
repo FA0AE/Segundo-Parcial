@@ -3,7 +3,7 @@
 # Muestra cómo utilizar pygame en programas que dibujan en la pantalla
 
 import pygame   # Librería de pygame
-from random import randint  #Librería randint de la librería random 
+from random import randint
 
 
 # Dimensiones de la pantalla
@@ -48,18 +48,23 @@ def actualizarBalas(listaBalas):
 def verificarColisiones(listaBalas, listaEnemigos):
     #recorrer las listas al revés
     for k in range(len(listaBalas)-1, -1, -1):   #Recorrer lista de balas del último al primero
-        bala = listaBalas[k]                    #Ciclo for para las balas
+        bala = listaBalas[k]
+        borrarBala = False          #Ciclo for para las balas
         for enemigos in range(len(listaEnemigos)-1, -1, -1):    #Ciclo for que visita a todos los enemigos
             enemigo = listaEnemigos[enemigos]
             #bala vs enemigo
             xbala = bala.rect.left              #Aquí no se usan duplas porque no se usarán ancho y alto
             ybala = bala.rect.bottom
             xenemigo, yenemigo, anchoEnemigo, altoEnemigo = enemigo.rect #Se obtiene de toda la dupla, se toma cada uno de los valores
-            if xbala >= xenemigo and xenemigo + anchoEnemigo and ybala >= yenemigo and ybala >= yenemigo + altoEnemigo:
+            if xbala >= xenemigo and xbala <= xenemigo + anchoEnemigo and ybala >= yenemigo and ybala >= yenemigo + altoEnemigo:
                 listaEnemigos.remove(enemigo)  #Se borra de la lista el enemigo. No lo borra de la pantalla luego, luego
+                borrarBala = True #condición para eliminar la bala
+                break
+        if borrarBala:
+            listaBalas.remove(bala)
 
     #Se modificó el orden de los poperadores relacionales debido a que la imagen estaba siendo dibujada arriba.
-    #Se tiene que modificar (x, y) de la imagen orignial pues esta siendo dibujada desde arriba y no desde abajo. 
+    #Se tiene que modificar (x, y) de la imagen orignial pues esta siendo dibujada desde arriba y no desde abajo.
 
 #Estructura básica de un programa que usa pygame para dibujar
 def dibujar():
